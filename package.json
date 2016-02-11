@@ -1,0 +1,20 @@
+{
+  "name": "oss-srp",
+  "version": "0.2.0",
+  "description": "OSS SRP",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/DamonGant/oss-srp.git"
+  },
+  "author": "",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/DamonGant/oss-srp/issues"
+  },
+  "homepage": "https://github.com/DamonGant/oss-srp#readme",
+  "private": "true"
+}
