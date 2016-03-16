@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Shell</title>
+		<base href="/">
+		<script src="jspm_packages/system.js"></script>
+		<script src="config.js"></script>
+		<script>
+			window.addEventListener("load", function() {
+				document.getElementById("loading").innerHTML = "Please Stand By...";
+				System.import("app/main").then(function(bootstrap) {
+					bootstrap.default();
+				});
+			})
+		</script>
+	</head>
+	<body>
+		<oss-srp>
+			<div id="loading" style="position:absolute; top:50%; left: 50%; width: 100%; font-size: 46px; margin-left: -50%; height: 56px; margin-top: -28px; text-align:center; font-family: sans-serif;">JavaScript must be enabled.</div>
+		</oss-srp>
+	</body>
+</html>

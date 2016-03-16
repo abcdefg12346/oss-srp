@@ -1,10 +1,11 @@
 {
   "name": "oss-srp",
   "version": "0.2.0",
-  "description": "OSS SRP",
+  "description": "OSS Ship Replacement Program",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server/bin/www",
+    "test": "echo \"Error: no test specified\" && exit 0"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,17 @@
   "homepage": "https://github.com/DamonGant/oss-srp#readme",
   "private": "true",
   "dependencies": {
-    "express": "^4.13.4"
+    "bluebird": "^3.3.4",
+    "body-parser": "^1.15.0",
+    "debug": "^2.2.0",
+    "express": "^4.13.4",
+    "lodash": "^4.6.1",
+    "pg": "^4.5.1",
+    "plus.container": "^1.1.1",
+    "raven": "^0.10.0",
+    "redis": "^2.5.1"
+  },
+  "devDependencies": {
+    "jspm": "^0.16.29"
   }
 }
