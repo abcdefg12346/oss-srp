@@ -1,0 +1,18 @@
+deployment:
+  prod:
+    branch: master
+    heroku:
+      appname: "oss-srp"
+machine:
+  environment:
+    NODE_ENV: test
+  node:
+    version: "4.4.0"
+test:
+  override:
+    - "npm run-script test"
+  pre:
+    - "nvm use 4.4.0"
+    - "npm i -g npm --progress=false"
+    - "npm i -g mocha --progress=false"
+    - "npm i --progress=false"
