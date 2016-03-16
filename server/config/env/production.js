@@ -2,7 +2,7 @@
 
 module.exports = {
 	pg: process.env.DATABASE_URL,
-	redis:
+	redis: process.env.REDIS_URL,
 	ip: process.env.OPENSHIFT_NODEJS_IP || process.env.IP || undefined,
 	port: process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 8080,
 	redis: {
