@@ -1,20 +1,25 @@
-var pgp = require('pg-promise')(/*options*/);
 
-var cn = {
-    host: 'localhost', 
+  var pgp = require('pg-promise')(/*options*/);
+
+  var cn = {
+    host: 'localhost',
     port: 5432,
     database: 'oss-srp',
     user: 'eve',
     password: 'oss'
-};
+  };
 
-var db = pgp(cn); // database instance;
-// select and return ship name from id:
-var sql = "SELECT * FROM skinLicense"
-db.one(sql)
+  var db = pgp(cn); // database instance;
+
+
+function query(sql){
+  db.query(sql)
     .then(function (user) {
-        console.log("ficken: " + user.name); // print user name;
+        console.log('found data');
     })
     .catch(function (error) {
-        console.log(error); // print why failed;
+        console.log(error);
     });
+}
+
+
