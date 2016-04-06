@@ -1,0 +1,16 @@
+﻿-- Table: public.payouts
+
+-- DROP TABLE public.payouts;
+
+CREATE TABLE public.payouts
+(
+  loss_id integer NOT NULL,
+  "typeID" integer NOT NULL,
+  bos integer,
+  CONSTRAINT "primary" PRIMARY KEY (loss_id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.payouts
+  OWNER TO skr0tm;
