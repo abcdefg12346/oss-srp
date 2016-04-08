@@ -23,11 +23,16 @@
     "body-parser": "^1.15.0",
     "debug": "^2.2.0",
     "express": "^4.13.4",
+    "jsonwebtoken": "^5.7.0",
     "lodash": "^4.6.1",
+    "morgan": "^1.7.0",
     "pg": "^4.5.1",
+    "pg-promise": "^3.8.2",
     "plus.container": "^1.1.1",
     "raven": "^0.10.0",
-    "redis": "^2.5.1"
+    "redis": "^2.5.1",
+    "request": "^2.70.0",
+    "request-promise": "^2.0.1"
   },
   "devDependencies": {
     "jspm": "^0.16.29"
