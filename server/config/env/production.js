@@ -7,7 +7,7 @@ module.exports = {
 	port: process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 8080,
 	redis: {
 	  url: process.env.REDIS_URL,
-	}
+	},
 	crest: {
 		"client_id": process.env.CREST_CLIENT_ID,
 		"client_secret": process.env.CREST_SECRET_KEY
