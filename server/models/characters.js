@@ -9,7 +9,7 @@ function CharacterModel() {
 				'id integer not null primary key,' +
   			'name varchar(128) not null unique,' +
   			'hash varchar(28) not null,' +
-  			'lastLogi//n timestamp not null,' +
+  			'lastLogin timestamp not null,' +
   			'flags integer not null' +
 			');'
 		);
