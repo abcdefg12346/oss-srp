@@ -7,4 +7,5 @@ module.exports = {
 	redis: {
 		url: "redis://localhost/"
 	}
+	host: "http://localhost:3000/"
 }

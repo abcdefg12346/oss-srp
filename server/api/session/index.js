@@ -3,6 +3,7 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const querystring = require("querystring");
 const request = require("request-promise");
+const config = require("../../config");
 
 const config = require("../../config");
 
@@ -11,7 +12,7 @@ router.get("/", function(req, res) {
 	const endpoint = "https://login.eveonline.com/oauth/authorize";
 	const params = {
 		response_type: "code",
-		redirect_uri: "http://localhost:3000/session/crest/",
+		redirect_uri: config.host + "/session/crest/",
 		client_id: config.crest.client_id,
 		scope: "",
 		state: req.query.scope
