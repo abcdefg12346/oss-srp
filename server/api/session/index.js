@@ -40,7 +40,9 @@ router.get("/crest", function(req, res, next) {
 		return request(endpoint, {headers: headers});
 	}).then(function(body) {
 		var characterData = JSON.parse(body);
-		res.send(characterData);
+		return req.app.get("characterModel").upsert(characterData)
+	}).then(function(data) {
+		res.send(data);
 	}).catch(function(e) {
 		next(e);
 	})

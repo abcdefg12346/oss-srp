@@ -1,5 +1,5 @@
 const config = require('../config');
-
+const debug = require('debug')('oss-srp');
 const pg = config.injector.get('pg');
 
 function CharacterModel() {
@@ -9,7 +9,8 @@ function CharacterModel() {
 				'id integer not null primary key,' +
   			'name varchar(128) not null unique,' +
   			'hash varchar(28) not null,' +
-  			'lastLogin timestamp not null' +
+  			'lastLogin timestamp not null,' +
+  			'flags integer not null' +
 			');'
 		);
 	}
@@ -20,18 +21,51 @@ function CharacterModel() {
 
 	this.upsert = function(character) {
 		return pg.query('select * from characters where id = ${cid};', {cid: character.CharacterID}).then(function(results) {
+			debug("upsert: found " + results.length + " results");
 			var vars = {
 				id: character.CharacterID,
-				name: character.CharacterName,
-				hash: character.CharacterOwnerHash
-			}
+				name: character.CharacterName || "GM Uninitialized",
+				hash: character.CharacterOwnerHash || "0",
+				defaultFlags: 0
+			};
 			if (results.length > 0) {
 				// update
-				return pg.query('update characters (name, hash, lastLogin) values (${name},${hash},CURRENT_TIMESTAMP) where id = ${id}', vars);
+				var setArgs = [
+					"lastLogin = CURRENT_TIMESTAMP"
+				];
+
+				if ('undefined' !== character.CharacterName) {
+					setArgs.push("name = ${name}");
+				}
+
+				if ('undefined' !== character.CharacterOwnerHash) {
+					setArgs.push("hash = ${hash}");
+
+					// if the character hash changed, reset permissions
+					if (character.CharacterOwnerHash !== results[0].hash && results[0].hash !== "0") {
+						setArgs.push("flags = ${defaultFlags}");
+					}
+				}
+
+				debug("upsert: starting update query with ", setArgs, vars);
+
+				return pg.query('update characters set ' + setArgs.join(", ") + ' where id = ${id}', vars);
 			} else {
 				// insert
-				return pg.query('insert into characters (id, name, hash, lastLogin) values (${id},${name},${hash},CURRENT_TIMESTAMP)', vars);
+				return pg.query('insert into characters (id, name, hash, lastLogin, flags) values (${id},${name},${hash},CURRENT_TIMESTAMP,${defaultFlags})', vars);
 			}
+		})
+	}
+
+	// this is great for authentication!
+	this.setFlags = function(cid, flags) {
+		debug("setFlags: upserting...")
+		return this.upsert({CharacterID: cid}).then(function() {
+			debug("setFlags: upsert done");
+			return pg.query("update characters set flags = ${flags} where id = ${cid}", {
+				cid: cid,
+				flags: flags
+			})
 		})
 	}
 }

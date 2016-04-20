@@ -32,7 +32,8 @@
     "raven": "^0.10.0",
     "redis": "^2.5.1",
     "request": "^2.70.0",
-    "request-promise": "^2.0.1"
+    "request-promise": "^2.0.1",
+    "yargs": "^4.6.0"
   },
   "devDependencies": {
     "jspm": "^0.16.29"
