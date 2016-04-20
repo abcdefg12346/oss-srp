@@ -11,6 +11,6 @@ module.exports = {
 	crest: {
 		"client_id": process.env.CREST_CLIENT_ID,
 		"client_secret": process.env.CREST_SECRET_KEY
-	}
+	},
 	host: "https://oss-srp.herokuapp.com/"
 }

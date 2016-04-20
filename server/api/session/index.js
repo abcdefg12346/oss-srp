@@ -5,8 +5,6 @@ const querystring = require("querystring");
 const request = require("request-promise");
 const config = require("../../config");
 
-const config = require("../../config");
-
 // get the EVE Online redirect URI
 router.get("/", function(req, res) {
 	const endpoint = "https://login.eveonline.com/oauth/authorize";

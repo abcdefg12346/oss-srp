@@ -6,6 +6,6 @@ module.exports = {
 	pg: "postgres://gant@127.0.0.1/oss-srp",
 	redis: {
 		url: "redis://localhost/"
-	}
+	},
 	host: "http://localhost:3000/"
 }
