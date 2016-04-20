@@ -17,7 +17,7 @@ router.get('/', function(req, res) {
 		scope: '',
 		state: req.query.scope
 	}
-	const url = endpoint + '?' + querystring.stringify(params, null, null, (q) => return q);
+	const url = endpoint + '?' + querystring.stringify(params, null, null, {encodeURIComponent: (q) => q});
 	res.status(200).send({authorize: url});
 })
 
