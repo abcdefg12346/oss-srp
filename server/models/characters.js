@@ -20,7 +20,7 @@ function CharacterModel() {
 	}
 
 	this.upsert = function(character) {
-		return pg.query('select * from characters where id = ${cid};', {cid: character.CharacterID}, 1).then(function(results) {
+		return pg.query('select * from characters where id = ${cid};', {cid: character.CharacterID}).then(function(results) {
 			debug("upsert: found " + results.length + " results");
 			var vars = {
 				id: character.CharacterID,
