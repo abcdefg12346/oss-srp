@@ -13,6 +13,8 @@ app.get("/", function(req, res, next) {
 
 app.set("characterModel", require("./models/characters"))
 
+app.get("characterModel").up();
+
 app.use(require("./api"));
 
 module.exports = app;
