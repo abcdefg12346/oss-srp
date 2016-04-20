@@ -9,7 +9,7 @@ function CharacterModel() {
 				'id integer not null primary key,' +
   			'name varchar(128) not null unique,' +
   			'hash varchar(28) not null,' +
-  			'lastLogin timestamp not null,' +
+  			'lastLogi//n timestamp not null,' +
   			'flags integer not null' +
 			');'
 		);
@@ -20,7 +20,7 @@ function CharacterModel() {
 	}
 
 	this.upsert = function(character) {
-		return pg.query('select * from characters where id = ${cid};', {cid: character.CharacterID}).then(function(results) {
+		return pg.query('select * from characters where id = ${cid};', {cid: character.CharacterID}, 1).then(function(results) {
 			debug("upsert: found " + results.length + " results");
 			var vars = {
 				id: character.CharacterID,
@@ -34,11 +34,11 @@ function CharacterModel() {
 					"lastLogin = CURRENT_TIMESTAMP"
 				];
 
-				if ('undefined' !== character.CharacterName) {
+				if ('undefined' !== typeof character.CharacterName) {
 					setArgs.push("name = ${name}");
 				}
 
-				if ('undefined' !== character.CharacterOwnerHash) {
+				if ('undefined' !== typeof character.CharacterOwnerHash) {
 					setArgs.push("hash = ${hash}");
 
 					// if the character hash changed, reset permissions
