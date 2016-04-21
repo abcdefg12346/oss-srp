@@ -22,6 +22,7 @@ router.get('/', function(req, res) {
 })
 
 router.get('/crest', function(req, res, next) {
+	const cm = req.app.get('characterModel');
 	const endpoint = 'https://login.eveonline.com/oauth/token';
 	const params = {
 		grant_type: 'authorization_code',
@@ -41,9 +42,15 @@ router.get('/crest', function(req, res, next) {
 		return request(endpoint, {headers: headers});
 	}).then(function(body) {
 		var characterData = JSON.parse(body);
-		return req.app.get('characterModel').upsert(characterData)
-	}).then(function(data) {
-		res.send(data);
+		return cm.upsert(characterData).then(function() {
+			return cm.get(characterData.CharacterID);
+		}).then(function(row) {
+			var token = jwt.sign(row, config.jwtkey);
+			res.send({
+				token: token,
+				data: row
+			});
+		})
 	}).catch(function(e) {
 		next(e);
 	})

@@ -1,3 +1,6 @@
 var app = require("../server/app");
 
-cm = app.get("characterModel");
+var cm = app.get("characterModel");
+var alliance = app.get("corporationModel");
+
+alliance.up().then(() => console.log("alliance up")).catch((e) => console.log(e))

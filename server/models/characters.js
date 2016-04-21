@@ -7,16 +7,26 @@ function CharacterModel() {
 		return pg.query(
 			'create table if not exists characters (' +
 				'id integer not null primary key,' +
-  			'name varchar(128) not null unique,' +
-  			'hash varchar(28) not null,' +
-  			'lastLogin timestamp not null,' +
-  			'flags integer not null' +
+				'name varchar(128) not null unique,' +
+				'hash varchar(28) not null,' +
+				'lastLogin timestamp not null,' +
+				'flags integer not null' +
 			');'
 		);
 	}
 
 	this.down = function() {
 		return pg.query('drop table characters;');
+	}
+
+	this.get = function(characterId) {
+		return pg.query("select * from characters where id = ${cid}", {cid: characterId}).then(function(results) {
+			if (results.length !== 1) {
+				return Promise.reject(new Error("Unknown character."));
+			} else {
+				return Promise.resolve(results[0]);
+			}
+		})
 	}
 
 	this.upsert = function(character) {
